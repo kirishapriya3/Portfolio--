@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 import { Menu, X, Moon, Sun } from "lucide-react";
 
@@ -38,6 +38,19 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const setHeaderSpacer = () => {
+      const height = headerRef.current?.offsetHeight || 80;
+      document.documentElement.style.setProperty("--header-offset", `${height}px`);
+    };
+
+    setHeaderSpacer();
+    window.addEventListener("resize", setHeaderSpacer);
+    return () => window.removeEventListener("resize", setHeaderSpacer);
+  }, [isScrolled]);
+
   const toggleTheme = () => {
     setIsDark((current) => {
       const next = !current;
@@ -62,12 +75,13 @@ export function Navigation() {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent z-[60] origin-left"
+        className="fixed top-0 left-0 right-0 h-1 logo-top z-[60] origin-left"
         style={{ scaleX: scrollYProgress }}
       />
       <header
+        ref={headerRef}
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled ? "glass py-6" : "bg-transparent py-8"
+          isScrolled ? "glass py-4" : "bg-transparent py-6"
         }`}
       >
         <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
@@ -76,8 +90,8 @@ export function Navigation() {
             onClick={(e) => scrollTo(e, "#hero")}
             className="text-2xl font-bold tracking-tighter text-foreground flex items-center gap-2"
           >
-            <span className="w-8 h-8 rounded bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-background">
-              K
+            <span className="w-8 h-8 rounded logo-box flex items-center justify-center">
+              <span className="logo-letter">K</span>
             </span>
             <span>Kirisha</span>
           </a>
@@ -154,6 +168,8 @@ export function Navigation() {
           </motion.div>
         )}
       </header>
+      {/* Spacer to prevent header from overlapping content */}
+      <div aria-hidden="true" style={{ height: 'var(--header-offset, 80px)' }} />
     </>
   );
 }

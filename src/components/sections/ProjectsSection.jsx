@@ -34,8 +34,10 @@ export function ProjectsSection() {
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  style={{ height: '170px', borderRadius: '12px' }}
+                  style={{ height: '224px', borderRadius: '12px' }}
                 />
                 <div
                   className="absolute inset-0"

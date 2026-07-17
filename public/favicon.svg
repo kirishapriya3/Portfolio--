@@ -1,6 +1,6 @@
 <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
-  <rect width="180" height="180" rx="36" fill="#87CEEB" stroke="#000000" stroke-width="8"/>
-  <text x="50%" y="57%" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="80" font-weight="700" fill="#1D4ED8" stroke="#1D4ED8" stroke-width="2" stroke-linejoin="round">
+  <rect width="180" height="180" rx="36" fill="#0ea5a4" stroke="#074c45" stroke-width="8"/>
+  <text x="50%" y="57%" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="80" font-weight="700" fill="#ffffff" stroke="#ffffff" stroke-width="1" stroke-linejoin="round">
     KR
   </text>
 </svg>

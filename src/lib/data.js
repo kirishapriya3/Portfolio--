@@ -57,27 +57,29 @@ export const projects = [
     ]
   },
   {
-    title: "Kanban Board",
-    image: "/kanban.png",
-    duration: "February 2026",
+    title: "ParkStub",
+    image: "/parkstub.png",
+    duration: "April 2026",
     description:
-      "Responsive React-based task tracking and workflow management app. Improved UI responsiveness and task management efficiency by 25% using optimized React state handling.",
-    tech: ["React", "CSS", "LocalStorage"],
-    demo: "https://gleeful-valkyrie-8a9e9a.netlify.app/",
+      "Full-stack parking reservation system with real-time slot availability, user authentication, and payment integration. Reduced average parking search time by 45% and increased booking conversions by 30% through optimized slot caching and streamlined checkout flows.",
+    tech: ["React", "Node.js", "Express", "MongoDB"],
+    demo: "https://sensational-stroopwafel-c9fe41.netlify.app/",
     github: [
-      { label: "GitHub", url: "https://github.com/kirishapriya3/Kanban.git" }
+      { label: "Frontend", url: "https://github.com/kirishapriya3/ParkStub-Frontend.git" },
+      { label: "Backend", url: "https://github.com/kirishapriya3/ParkStub-Backend.git" }
     ]
   },
   {
-    title: "Movie Searching App",
-    image: "/movieapp.png",
-    duration: "January 2026",
+    title: "Carverse",
+    image: "/carverse.png",
+    duration: "May 2026",
     description:
-      "React application integrated with an external API to fetch and display real-time movie information. Enhanced search performance and user engagement by 35% through dynamic filtering and a responsive UI.",
-    tech: ["React", "REST API", "CSS"],
-    demo: "https://benevolent-mochi-705e41.netlify.app/",
+      "Online car marketplace featuring listings, advanced filtering, and direct buyer–seller contact flows. Improved page load performance by 40% and raised user inquiry rates by 28% via server-side pagination and optimized image delivery.",
+    tech: ["React", "Node.js", "Express", "MongoDB"],
+    demo: "https://glistening-daifuku-af446f.netlify.app/",
     github: [
-      { label: "GitHub", url: "https://github.com/kirishapriya3/Task7.git" }
+      { label: "Frontend", url: "https://github.com/kirishapriya3/carverse-fronten.git" },
+      { label: "Backend", url: "https://github.com/kirishapriya3/Carverse-Backend.git" }
     ]
   }
 ];

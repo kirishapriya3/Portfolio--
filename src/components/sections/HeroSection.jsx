@@ -29,8 +29,14 @@ export function HeroSection() {
     return () => clearTimeout(timer);
   }, [text, isDeleting, roleIndex]);
 
+  const [firstName, lastName] = personalInfo.name.split(" ");
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+    <section
+      id="hero"
+      className="relative flex items-center justify-center overflow-hidden"
+      style={{ minHeight: 'calc(100vh - var(--header-offset, 80px))' }}
+    >
       <ParticleBackground />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -50,7 +56,13 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6"
           >
-            <span className="text-gradient leading-tight">{personalInfo.name}</span>
+            <span className="text-gradient leading-tight">
+              {firstName}{' '}
+              <span>
+                <span className="text-brand">{lastName.charAt(0)}</span>
+                {lastName.slice(1)}
+              </span>
+            </span>
           </motion.h1>
 
           <motion.div

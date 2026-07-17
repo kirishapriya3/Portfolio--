@@ -74,6 +74,14 @@
   --ring: 178 85% 35%;
   
   --radius: 0.5rem;
+
+  /* Brand color used for highlighted letters and logo boxes (works in light mode) */
+  --brand-accent: 174 62% 50%; /* hsl: #0ea5a4-ish */
+  --brand-on-accent: 0 0% 100%;
+
+  /* Brand color adapted for dark mode */
+  --brand-accent: 182 80% 46%; /* hsl: #06b6d4-ish */
+  --brand-on-accent: 230 63% 5%;
 }
 
 .dark {
@@ -173,6 +181,33 @@
 }
 .border-gradient:hover::before {
   opacity: 1;
+}
+
+/* Professional logo colors that work in light and dark modes */
+.logo-box {
+  background: hsl(var(--brand-accent));
+  color: hsl(var(--brand-on-accent));
+}
+.dark .logo-box {
+  background: hsl(var(--brand-accent));
+  color: hsl(var(--brand-on-accent));
+}
+
+.logo-top {
+  background: hsl(var(--brand-accent));
+}
+.dark .logo-top {
+  background: hsl(var(--brand-accent));
+}
+
+/* utility to color text with the brand accent */
+.text-brand {
+  color: hsl(var(--brand-accent));
+}
+
+/* Ensure the logo letter inside the logo box remains white in all themes */
+.logo-box > .logo-letter {
+  color: #ffffff !important;
 }
 
 /* Grid Background — applied via pseudo-element so the mask never clips children */
