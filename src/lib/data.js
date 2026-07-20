@@ -12,6 +12,7 @@ export const personalInfo = {
   email: "kirishapriya3@gmail.com",
   phone: "8072341027",
   github: "https://github.com/kirishapriya3",
+  linkedin: "https://www.linkedin.com/in/kirisha-r-501212248?utm_source=share_via&utm_content=profile&utm_medium=member_android",
 };
 
 export const skills = {
@@ -74,7 +75,7 @@ export const projects = [
     image: "/carverse.png",
     duration: "May 2026",
     description:
-      "Online car marketplace featuring listings, advanced filtering, and direct buyer–seller contact flows. Improved page load performance by 40% and raised user inquiry rates by 28% via server-side pagination and optimized image delivery.",
+      "Smart car discovery app with natural-language search, saved favorites, and authenticated wishlist flows. Improved engagement by 22% and reduced load latency by 30% through optimized API calls and client-side pagination.",
     tech: ["React", "Node.js", "Express", "MongoDB"],
     demo: "https://glistening-daifuku-af446f.netlify.app/",
     github: [

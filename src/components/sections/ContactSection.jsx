@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { personalInfo } from '@/lib/data';
-import { Github, Mail, MapPin } from 'lucide-react';
+import { Github, Mail, MapPin, Linkedin } from 'lucide-react';
 
 export function ContactSection() {
   return (
@@ -31,46 +32,98 @@ export function ContactSection() {
             <div>
               <h3 className="text-2xl font-bold mb-2">Let's build something extraordinary.</h3>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Available for freelance projects and full-time opportunities — let's talk about what you're building.
+                Available for full-time opportunities — let's talk about what you're building.
               </p>
             </div>
 
-            <div className="space-y-6 max-w-xl mx-auto">
-              <div className="grid grid-cols-[3rem_minmax(0,1fr)] items-center gap-4 group">
-                <div className="w-12 h-12 rounded-full glass flex items-center justify-center text-primary border border-border group-hover:border-primary transition-colors">
-                  <Mail className="w-5 h-5" />
-                </div>
-                <div className="min-w-0 text-left">
-                  <div className="text-sm text-muted-foreground font-mono mb-1">EMAIL</div>
-                  <a href={`mailto:${personalInfo.email}`} className="text-foreground hover:text-primary transition-colors font-medium">
-                    {personalInfo.email}
-                  </a>
-                </div>
-              </div>
+            <ContactForm />
 
-              {/* Phone contact removed as requested */}
-
-              <div className="grid grid-cols-[3rem_minmax(0,1fr)] items-center gap-4 group">
-                <div className="w-12 h-12 rounded-full glass flex items-center justify-center text-accent border border-border group-hover:border-accent transition-colors">
-                  <MapPin className="w-5 h-5" />
-                </div>
-                <div className="min-w-0 text-left">
-                  <div className="text-sm text-muted-foreground font-mono mb-1">LOCATION</div>
-                  <div className="text-foreground font-medium">
-                    {personalInfo.location}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-8 flex justify-center gap-4">
+            <div className="pt-4 flex justify-center gap-4">
               <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full glass border border-border flex items-center justify-center text-foreground hover:text-primary hover:border-primary transition-all hover:-translate-y-1">
                 <Github className="w-5 h-5" />
+              </a>
+
+              <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full glass border border-border flex items-center justify-center text-foreground hover:text-primary hover:border-primary transition-all hover:-translate-y-1">
+                <Linkedin className="w-5 h-5" />
+              </a>
+
+              <a href={`mailto:${personalInfo.email}`} className="w-12 h-12 rounded-full glass border border-border flex items-center justify-center text-foreground hover:text-primary hover:border-primary transition-all hover:-translate-y-1">
+                <Mail className="w-5 h-5" />
               </a>
             </div>
           </motion.div>
         </div>
       </div>
     </section>
+  );
+}
+
+function ContactForm() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('idle');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setStatus('invalid');
+      return;
+    }
+
+    const isValidEmail = (em) => /^\S+@\S+\.\S+$/.test(em);
+    if (!isValidEmail(email)) {
+      setStatus('invalid-email');
+      return;
+    }
+
+    // Build mailto link so the message opens in the user's mail client
+    const to = encodeURIComponent(personalInfo.email);
+    const subject = encodeURIComponent(`Message from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+    const mailto = `mailto:${to}?subject=${subject}&body=${body}`;
+
+    // Redirect to mail client
+    window.location.href = mailto;
+    setStatus('sent');
+    setName('');
+    setEmail('');
+    setMessage('');
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="mx-auto w-full max-w-xl bg-background/60 glass p-8 rounded-2xl shadow-lg">
+      <div className="grid gap-4">
+        <input
+          type="text"
+          placeholder="Your Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full rounded-lg border border-border p-4 bg-transparent text-foreground placeholder:text-muted-foreground"
+        />
+
+        <input
+          type="email"
+          placeholder="Your Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full rounded-lg border border-border p-4 bg-transparent text-foreground placeholder:text-muted-foreground"
+        />
+
+        <textarea
+          rows={6}
+          placeholder="Your Message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          className="w-full rounded-lg border border-border p-4 bg-transparent text-foreground placeholder:text-muted-foreground resize-none"
+        />
+
+        <button type="submit" className="w-full bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:bg-primary/90 transition-colors">
+          {status === 'sending' ? 'Sending...' : 'Send Message'}
+        </button>
+
+        {status === 'invalid' && <div className="text-sm text-red-500">Please fill in all fields.</div>}
+      </div>
+    </form>
   );
 }
