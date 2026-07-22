@@ -34,8 +34,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex items-center justify-center overflow-hidden"
-      style={{ minHeight: 'calc(100vh - var(--header-offset, 80px))' }}
+      className="relative flex items-center justify-center overflow-hidden pt-12 md:pt-16"
     >
       <ParticleBackground />
 

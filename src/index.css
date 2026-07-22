@@ -127,6 +127,14 @@
     scroll-behavior: smooth;
     overflow-x: hidden;
   }
+
+  html {
+    scroll-padding-top: 5.5rem;
+  }
+
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
 }
 
 .glass {

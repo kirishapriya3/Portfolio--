@@ -40,17 +40,6 @@ export function Navigation() {
 
   const headerRef = useRef(null);
 
-  useEffect(() => {
-    const setHeaderSpacer = () => {
-      const height = headerRef.current?.offsetHeight || 80;
-      document.documentElement.style.setProperty("--header-offset", `${height}px`);
-    };
-
-    setHeaderSpacer();
-    window.addEventListener("resize", setHeaderSpacer);
-    return () => window.removeEventListener("resize", setHeaderSpacer);
-  }, [isScrolled]);
-
   const toggleTheme = () => {
     setIsDark((current) => {
       const next = !current;
@@ -65,8 +54,11 @@ export function Navigation() {
     setMobileMenuOpen(false);
     const element = document.querySelector(href);
     if (element) {
+      const headerHeight = headerRef.current?.offsetHeight || 88;
+      const top = element.getBoundingClientRect().top + window.scrollY - headerHeight - 24;
+
       window.scrollTo({
-        top: element.offsetTop,
+        top: Math.max(0, top),
         behavior: "smooth",
       });
     }
@@ -80,8 +72,8 @@ export function Navigation() {
       />
       <header
         ref={headerRef}
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled ? "glass py-4" : "bg-transparent py-6"
+        className={`fixed top-0 w-full z-50 transition-all duration-300 border-b border-border/40 bg-background dark:bg-slate-950 ${
+          isScrolled ? "py-3 shadow-sm" : "py-4"
         }`}
       >
         <div className="container mx-auto px-6 md:px-12 flex items-center justify-between">
@@ -168,8 +160,6 @@ export function Navigation() {
           </motion.div>
         )}
       </header>
-      {/* Spacer to prevent header from overlapping content */}
-      <div aria-hidden="true" style={{ height: 'var(--header-offset, 80px)' }} />
     </>
   );
 }

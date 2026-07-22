@@ -11,7 +11,7 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-background text-foreground bg-grid-pattern selection:bg-primary/30 selection:text-primary relative">
       <Navigation />
-      <main className="relative z-10">
+      <main className="relative z-10 pt-20 md:pt-24">
         <HeroSection />
         <AboutSection />
         <SkillsSection />
